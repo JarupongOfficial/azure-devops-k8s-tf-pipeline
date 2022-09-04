@@ -10,7 +10,7 @@ trigger:
 - master
 
 steps:
-- script: echo From VSCODE of jarupong
+- script: echo ***MASTER trigger***
   displayName: 'Run a one-line script'
 
 - script: |
