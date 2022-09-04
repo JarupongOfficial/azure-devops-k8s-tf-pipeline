@@ -6,7 +6,7 @@
 pool:  
   name: local 
      
-trigger: none 
+trigger: master
 
 steps:
 - script: echo From VSCODE of jarupong
