@@ -9,7 +9,7 @@ pool:
 trigger: none 
 
 steps:
-- script: echo Hello, world!
+- script: echo From VSCODE of jarupong
   displayName: 'Run a one-line script'
 
 - script: |
