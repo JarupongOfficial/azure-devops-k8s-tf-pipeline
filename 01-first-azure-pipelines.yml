@@ -7,10 +7,10 @@ pool:
   name: local 
      
 trigger:
-- master
+- main
 
 steps:
-- script: echo ***MASTER trigger***
+- script: echo ***MAIN trigger***
   displayName: 'Run a one-line script'
 
 - script: |
