@@ -14,6 +14,29 @@ pool:
 # pool:
 #   vmImage: $(operatingSystem)
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+stages:
+- stage: Build
+  jobs:
+    - job: BuildJob
+      steps:
+        - bash: echo "Work on Build package"
+
+- stage: DevDeploy
+  jobs:
+    - deployment: DevDeployJob
+      environment: DEV
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+              - script: echo "Deploy to $(environment)"
+
+- stage: QADeploy
+  jobs:
+    - deployment: QADeployJob
+      environment: QA
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+              - script: echo "Deploy to $(environment)"
