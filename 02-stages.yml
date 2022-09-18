@@ -9,18 +9,24 @@ stages:
   jobs:
   - job: FirstJob
     steps:
+    - bash: echo Clean package
     - bash: echo Build package
 - stage: Dev_Deploy
+  dependsOn: Dev_Build
   jobs:
   - job: SecondJob
     steps:
     - bash: echo Deploy package
 - stage: QA_Test
+  dependsOn: Dev_Build
   jobs:
   - job: ThirdJob
     steps:
     - bash: echo Test package
 - stage: Prod_Deploy
+  dependsOn: 
+  - Dev_Deploy
+  - QA_Test
   jobs:
   - job: ForthJob
     steps:
