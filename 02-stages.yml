@@ -23,7 +23,6 @@ stages:
     # - bash: mvn --version
     # - bash: docker --verison
     - bash: echo Build package
-    - bash: mkdir /artifactStagingDirectory
     # - bash: ls -R $(Build.ArtifactStagingDirectory)
     - task: CopyFiles@2
       inputs:
@@ -31,12 +30,12 @@ stages:
         Contents: |
           **/*.yaml
           **/*.tf
-        TargetFolder: '/artifactStagingDirectory'
-    - bash: ls -R /artifactStagingDirectory
+        TargetFolder: '/pipeline-backups'
+    - bash: ls -R /pipeline-backups
     - bash: echo Build package
     - task: PublishBuildArtifacts@1
       inputs:
-        PathtoPublish: '/artifactStagingDirectory'
+        PathtoPublish: '/pipeline-backups'
         ArtifactName: 'drop'
         publishLocation: 'Container'
 
