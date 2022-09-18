@@ -31,7 +31,7 @@ stages:
           **/*.yaml
           **/*.tf
         TargetFolder: '/pipeline-backups'
-    - bash: ls -R /pipeline-backups
+    - bash: ls -R ./pipeline-backups
     - bash: echo Build package
     - task: PublishBuildArtifacts@1
       inputs:
