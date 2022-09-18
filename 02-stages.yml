@@ -18,6 +18,20 @@ stages:
     - bash: echo $(System.DefaultWorkingDirectory)
     - bash: ls -R $(System.DefaultWorknigDirectory)
     - bash: echo $(Build.ArtifactStagingDirectory)
+    - bash: echo $(Build.ArtifactStagingDirectory)
+    - bash: python --version
+    - bash: mvn --version
+    - bash: docker --verison
+    - bash: echo Build package
+    - bash: ls -R $(Build.ArtifactStagingDirectory)
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(System.DefaultWorknigDirectory)'
+        Contents: |
+          **/*.yaml
+          **/*.tf
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    - bash: ls -R $(Build.ArtifactStagingDirectory)
     - bash: echo Build package
   - job: FirstTwoJob
     steps:
