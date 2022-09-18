@@ -23,6 +23,7 @@ stages:
     # - bash: mvn --version
     # - bash: docker --verison
     - bash: echo Build package
+    - bash: mkdir /artifactStagingDirectory
     # - bash: ls -R $(Build.ArtifactStagingDirectory)
     - task: CopyFiles@2
       inputs:
@@ -30,15 +31,15 @@ stages:
         Contents: |
           **/*.yaml
           **/*.tf
-        TargetFolder: '.'
-    - bash: ls -R $(System.DefaultWorknigDirectory)
+        TargetFolder: '/artifactStagingDirectory'
+    - bash: ls -R /artifactStagingDirectory
     - bash: echo Build package
     - task: PublishBuildArtifacts@1
       inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        PathtoPublish: '/artifactStagingDirectory'
         ArtifactName: 'drop'
         publishLocation: 'Container'
-        
+
   - job: FirstTwoJob
     steps:
     - bash: echo Build package
