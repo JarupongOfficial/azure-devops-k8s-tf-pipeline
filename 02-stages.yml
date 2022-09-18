@@ -1,0 +1,27 @@
+pool:
+  name: local
+
+trigger:
+  - main
+
+stages:
+- stage: Dev_Build
+  jobs:
+  - job: FirstJob
+    steps:
+    - bash: echo Build package
+- stage: Dev_Deploy
+  jobs:
+  - job: SecondJob
+    steps:
+    - bash: echo Deploy package
+- stage: QA_Test
+  jobs:
+  - job: ThirdJob
+    steps:
+    - bash: echo Test package
+- stage: Prod_Deploy
+  jobs:
+  - job: ForthJob
+    steps:
+    - bash: echo K8S apply package
