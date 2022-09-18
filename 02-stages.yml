@@ -7,22 +7,32 @@ trigger:
 stages:
 - stage: Dev_Build
   jobs:
-  - job: FirstJob
+  - job: FirstOneJob
     steps:
     - bash: echo Clean package
+    - bash: echo $(PipelineLevelVariable)
+    - bash: echo Build package
+  - job: FirstTwoJob
+    steps:
     - bash: echo Build package
 - stage: Dev_Deploy
+  variables:
+    environment: Dev  
   dependsOn: Dev_Build
   jobs:
   - job: SecondJob
     steps:
     - bash: echo Deploy package
+    - bash: echo $(environment) is current stage
 - stage: QA_Test
+  variables:
+    environment: QA 
   dependsOn: Dev_Build
   jobs:
   - job: ThirdJob
     steps:
     - bash: echo Test package
+    - bash: echo $(environment) is current stage
 - stage: Prod_Deploy
   dependsOn: 
   - Dev_Deploy
