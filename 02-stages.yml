@@ -11,33 +11,43 @@ stages:
     steps:
     - bash: echo Clean package
     - bash: echo $(PipelineLevelVariable)
+    - bash: echo $(Build.BuildNumber)
+    - bash: echo $(Build.BuildId)
+    - bash: echo $(Build.SourceBranchName)
+    - bash: echo $(Build.SourceDirectory)
+    - bash: echo $(System.DefaultWorkingDirectory)
+    - bash: ls -R $(System.DefaultWorknigDirectory)
+    - bash: echo $(Build.ArtifactStagingDirectory)
     - bash: echo Build package
   - job: FirstTwoJob
     steps:
     - bash: echo Build package
-- stage: Dev_Deploy
-  variables:
-    environment: Dev  
-  dependsOn: Dev_Build
-  jobs:
-  - job: SecondJob
-    steps:
-    - bash: echo Deploy package
-    - bash: echo $(environment) is current stage
-- stage: QA_Test
-  variables:
-    environment: QA 
-  dependsOn: Dev_Build
-  jobs:
-  - job: ThirdJob
-    steps:
-    - bash: echo Test package
-    - bash: echo $(environment) is current stage
-- stage: Prod_Deploy
-  dependsOn: 
-  - Dev_Deploy
-  - QA_Test
-  jobs:
-  - job: ForthJob
-    steps:
-    - bash: echo K8S apply package
+
+
+    
+# - stage: Dev_Deploy
+#   variables:
+#     environment: Dev  
+#   dependsOn: Dev_Build
+#   jobs:
+#   - job: SecondJob
+#     steps:
+#     - bash: echo Deploy package
+#     - bash: echo $(environment) is current stage
+# - stage: QA_Test
+#   variables:
+#     environment: QA 
+#   dependsOn: Dev_Build
+#   jobs:
+#   - job: ThirdJob
+#     steps:
+#     - bash: echo Test package
+#     - bash: echo $(environment) is current stage
+# - stage: Prod_Deploy
+#   dependsOn: 
+#   - Dev_Deploy
+#   - QA_Test
+#   jobs:
+#   - job: ForthJob
+#     steps:
+#     - bash: echo K8S apply package
